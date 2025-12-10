@@ -48,5 +48,44 @@
     </a>
 
   </div>
+<script type="module">
+  // Import Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+  // Your Firebase config (replace with your own)
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "yourproject.firebaseapp.com",
+    projectId: "yourproject",
+    storageBucket: "yourproject.appspot.com",
+    messagingSenderId: "123",
+    appId: "1:123:web:456"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Handle Login
+  const form = document.querySelector("form");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const email = form.querySelector("input[type='email']").value;
+    const pass = form.querySelector("input[type='password']").value;
+
+    signInWithEmailAndPassword(auth, email, pass)
+      .then(() => {
+        // Redirect to dashboard
+        window.location.href = "/dashboard.html";
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  });
+</script>
+
+  
 </body>
 </html>
